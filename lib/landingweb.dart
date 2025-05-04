@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,59 +18,67 @@ class LandingPageWeb extends StatefulWidget {
 }
 
 class _LandingPageWebState extends State<LandingPageWeb> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isScrolled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset > 100 && !_isScrolled) {
+      setState(() {
+        _isScrolled = true;
+      });
+    } else if (_scrollController.offset <= 100 && _isScrolled) {
+      setState(() {
+        _isScrolled = false;
+      });
+    }
+  }
 
   double _getFontSize(BoxConstraints constraints) {
     final width = constraints.maxWidth;
-    if (width <= 480) {
-      return 8.0;
-    } else if (width > 480 && width <= 960) {
-      return 22.0;
-    } else {
-      return 22.0;
-    }
+    if (width <= 480) return 8.0;
+    if (width > 480 && width <= 960) return 22.0;
+    return 22.0;
   }
+
   double _getFontSizemore(BoxConstraints constraints) {
     final width = constraints.maxWidth;
-    if (width <= 480) {
-      return 6.0;
-    } else if (width > 580 && width <= 1000) {
-      return 10.0;
-    } else {
-      return 19.0;
-    }
+    if (width <= 480) return 6.0;
+    if (width > 580 && width <= 1000) return 10.0;
+    return 19.0;
   }
+
   double _getFontSizemin(BoxConstraints constraints) {
     final width = constraints.maxWidth;
-    if (width <= 480) {
-      return 5.0;
-    } else if (width > 480 && width <= 960) {
-      return 11.2;
-    } else {
-      return 12.0;
-    }
+    if (width <= 480) return 5.0;
+    if (width > 480 && width <= 960) return 11.2;
+    return 12.0;
   }
 
   double _getFontSizemain(BoxConstraints constraints) {
     final width = constraints.maxWidth;
-    if (width <= 480) {
-      return 8.0;
-    } else if (width > 480 && width <= 960) {
-      return 12.2;
-    } else {
-      return 15.0;
-    }
-  }
-  double _getFontSizehead(BoxConstraints constraints) {
-    final width = constraints.maxWidth;
-    if (width <= 480) {
-      return 9.0;
-    } else if (width > 480 && width <= 960) {
-      return 28.0;
-    } else {
-      return 30.0;
-    }
+    if (width <= 480) return 8.0;
+    if (width > 480 && width <= 960) return 12.2;
+    return 15.0;
   }
 
+  double _getFontSizehead(BoxConstraints constraints) {
+    final width = constraints.maxWidth;
+    if (width <= 480) return 9.0;
+    if (width > 480 && width <= 960) return 28.0;
+    return 30.0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,309 +89,692 @@ class _LandingPageWebState extends State<LandingPageWeb> {
         final fontSizemin = _getFontSizemin(constraints);
         final fontSizemain = _getFontSizemain(constraints);
         final fontSizemore = _getFontSizemore(constraints);
-        var height = MediaQuery.of(context).size.height;
         var h = MediaQuery.of(context).size.height;
         var w = MediaQuery.of(context).size.width;
+
         return Scaffold(
           backgroundColor: WebPrimary.kPrimaryColor,
           body: Stack(
-            fit: StackFit.expand,
             children: [
-              Image.asset(
-                "asset/dian10.jpg",
-                fit: BoxFit.fitWidth,
-              ),
-              SingleChildScrollView(
-                child: Container(
-                  color: Colors.transparent,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: h / 13.5,
-                        width: w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: w / 3,
-                            ),
-                            TabWeb(
-                                taboption: 'Home', page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'About',
-                                page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'Resume',
-                                page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'Skills',
-                                page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'Project',
-                                page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'My Blog',
-                                page: LandingPageMobile()),
-                            TabWeb(
-                                taboption: 'Contact',
-                                page: LandingPageMobile()),
-                            SizedBox(
-                              width: w / 9,
-                            ),
+              // Animated background gradient
+              AnimatedContainer(
+                duration: Duration(milliseconds: 1000),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: _isScrolled
+                        ? [
+                            Color(0xFF0F2027),
+                            Color(0xFF203A43),
+                            Color(0xFF2C5364),
+                          ]
+                        : [
+                            Color(0xFF000000),
+                            Color(0xFF0F2027),
+                            Color(0xFF203A43),
                           ],
-                        ),
+                  ),
+                ),
+              ),
+              
+              // Floating particles
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: Container(
+                    child: CustomPaint(
+                      painter: ParticlePainter(isScrolled: _isScrolled),
+                    ),
+                  ),
+                ),
+              ),
+
+              SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    // Navigation Bar
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 500),
+                      height: h / 10,
+                      padding: EdgeInsets.symmetric(horizontal: w / 10),
+                      decoration: BoxDecoration(
+                        color: _isScrolled
+                            ? Colors.black.withOpacity(0.7)
+                            : Colors.transparent,
+                        boxShadow: _isScrolled
+                            ? [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 10,
+                                  spreadRadius: 2,
+                                )
+                              ]
+                            : [],
                       ),
-                      SizedBox(height: h / 7),
-                      Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          Text(
+                            'Rizvin K Salim',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 24,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(width: w / 99),
-                              Container(
-                                width: w / 1.9,
-                                height: h / 1.9,
+                              NavTab(taboption: 'Home', page: LandingPageMobile()),
+                              NavTab(taboption: 'About', page: LandingPageMobile()),
+                              NavTab(taboption: 'Resume', page: LandingPageMobile()),
+                              NavTab(taboption: 'Skills', page: LandingPageMobile()),
+                              NavTab(taboption: 'Project', page: LandingPageMobile()),
+                              NavTab(taboption: 'Contact', page: LandingPageMobile()),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Hero Section
+                    Container(
+                      height: h,
+                      padding: EdgeInsets.symmetric(horizontal: w / 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FadeIn(
+                                  duration: Duration(milliseconds: 800),
+                                  child: Text(
+                                    'Hi, I\'m',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: fontSizehead * 0.6,
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                FadeIn(
+                                  duration: Duration(milliseconds: 1000),
+                                  child: Text(
+                                    'Rizvin K Salim',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: fontSizehead * 1.5,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+                                FadeIn(
+                                  duration: Duration(milliseconds: 1200),
+                                  child: Text(
+                                    'Front-end Software Developer',
+                                    style: GoogleFonts.spaceGrotesk(
+                                      fontSize: fontSizemin * 1.5,
+                                      color: Color(0xFF4FC3F7),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 30),
+                                FadeIn(
+                                  duration: Duration(milliseconds: 1400),
+                                  child: Container(
+                                    width: w / 2,
+                                    child: Text(
+                                      'I am a frontend Flutter developer with expertise in UI/UX design and state management, crafting intuitive interfaces for cross-platform applications.',
+                                      style: GoogleFonts.spaceGrotesk(
+                                        fontSize: fontSizemin,
+                                        color: Colors.white70,
+                                        height: 1.6,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 40),
+                                FadeIn(
+                                  duration: Duration(milliseconds: 1600),
+                                  child: Row(
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFF4FC3F7),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(30),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'View Projects',
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: fontSizemore,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 20),
+                                      OutlinedButton(
+                                        onPressed: () {},
+                                        style: OutlinedButton.styleFrom(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 15),
+                                          side: BorderSide(
+                                              color: Color(0xFF4FC3F7), width: 2),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(30),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Download CV',
+                                          style: GoogleFonts.spaceGrotesk(
+                                            fontSize: fontSizemore,
+                                            color: Color(0xFF4FC3F7),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(width: 50),
+                          Expanded(
+                            child: FadeIn(
+                              duration: Duration(milliseconds: 1000),
+                              child: Container(
+                                height: h * 0.7,
                                 decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: WebPrimary.kDarkColor,
-                                      blurRadius: 20.0,
+                                      color: Color(0xFF4FC3F7).withOpacity(0.5),
+                                      blurRadius: 50,
+                                      spreadRadius: 10,
                                     ),
                                   ],
-                                  shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: AssetImage('asset/IMG_6788.jpg'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 10),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hi,',
-                                    style: GoogleFonts.lato(
-                                        fontSize: 25, color: Colors.white),
-                                  ),
-                                  Text(
-                                    'I\'m Rizvin K Salim',
-                                    style: GoogleFonts.spaceGrotesk(
-                                        fontSize: fontSizehead, color: Colors.white),
-                                  ),
-                                  Text(
-                                    'Front-end Software Developer',
-                                    style: GoogleFonts.fingerPaint(
-                                        fontSize: fontSizemin, color: Colors.white),
-                                  ),
-                                  SizedBox(height: 10,),
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      'I am a frontend Flutter developer with expertise in'
-                                          ' \nUI/UX design and state management, crafting intuitive '
-                                          '\ninterfaces for cross-platform applications.',
-                                      style: GoogleFonts.spaceGrotesk(
-                                          fontSize: fontSizemin, color: Colors.white54),
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Container(
-                                      height: 2,
-                                      width: w / 5,
-                                      color: Colors.white70),
-                                  SizedBox(height: 23),
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                    children: [
-                                      CustomButton(
-                                          h: h,
-                                          w: w,
-                                          text: 'More',
-                                          fontSize: fontSizemore,
-                                          Pageclick: LandingPageWeb()),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      CustomButton(
-                                          h: h,
-                                          w: w,
-                                          fontSize: fontSizemore,
-                                          text: 'Project',
-                                          Pageclick: LandingPageWeb()),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
+                            ),
                           ),
-                          SizedBox(height: 200),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              SizedBox(
-                                width:w/3,
-                                child: Image.asset('asset/Programmer-rafiki.png',),),
+                        ],
+                      ),
+                    ),
 
-                              SizedBox(
-                                width: w/3,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    // About Section
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: w / 10, vertical: 100),
+                      color: Colors.black.withOpacity(0.2),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Image.asset(
+                              'asset/Programmer-rafiki.png',
+                              height: 500,
+                            ),
+                          ),
+                          SizedBox(width: 50),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'About Me',
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: fontSizehead,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 30),
+                                Container(
+                                  height: 4,
+                                  width: 100,
+                                  color: Color(0xFF4FC3F7),
+                                ),
+                                SizedBox(height: 40),
+                                InfoRow(
+                                  label: 'Name:',
+                                  value: 'Rizvin K Salim',
+                                  fontSizemain: fontSizemain,
+                                ),
+                                SizedBox(height: 15),
+                                InfoRow(
+                                  label: 'DOB:',
+                                  value: '07/12/2000',
+                                  fontSizemain: fontSizemain,
+                                ),
+                                SizedBox(height: 15),
+                                InfoRow(
+                                  label: 'Email:',
+                                  value: 'rizvin@example.com',
+                                  fontSizemain: fontSizemain,
+                                ),
+                                SizedBox(height: 15),
+                                InfoRow(
+                                  label: 'From:',
+                                  value: 'Kerala, India',
+                                  fontSizemain: fontSizemain,
+                                ),
+                                SizedBox(height: 30),
+                                Text(
+                                  'About me:',
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: fontSizemain,
+                                    color: Colors.white70,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  'With a B.Tech degree and hands-on experience, I specialize in Flutter for mobile apps, web apps, and websites, coupled with UI/UX design expertise using tools like Figma. I\'m dedicated to delivering high-quality solutions that exceed user expectations.',
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: fontSizemain,
+                                    color: Colors.white70,
+                                    height: 1.6,
+                                  ),
+                                ),
+                                SizedBox(height: 40),
+                                Row(
                                   children: [
-                                    Center(
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xFF4FC3F7),
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 15),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                      ),
                                       child: Text(
-                                        'About Me',
-                                        style: GoogleFonts.fingerPaint(
-                                            fontSize: fontSizehead, color: Colors.white),
+                                        'Hire Me',
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: fontSizemore,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(height: 50,),
-                                    Row(
-                                      children: [
-                                        Text('Name: ',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.firaSans(
-                                              fontSize: fontSizemain, color: Colors.white54),
+                                    SizedBox(width: 20),
+                                    OutlinedButton(
+                                      onPressed: () {},
+                                      style: OutlinedButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 15),
+                                        side: BorderSide(
+                                            color: Color(0xFF4FC3F7), width: 2),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30),
                                         ),
-                                        Text('Rizvin K Salim',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.firaSans(
-                                              fontSize: fontSizemain, color: Colors.white),
+                                      ),
+                                      child: Text(
+                                        'Download CV',
+                                        style: GoogleFonts.spaceGrotesk(
+                                          fontSize: fontSizemore,
+                                          color: Color(0xFF4FC3F7),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                    SizedBox(height: 15,),
-                                    Row(
-                                      children: [
-                                        Text('DOB: ',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.firaSans(
-                                              fontSize: fontSizemain, color: Colors.white54),
-                                        ),
-                                        Text('07/12/2000',
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.firaSans(
-                                              fontSize: fontSizemain, color: Colors.white),
-                                        ),
-                                      ],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Skills Section
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: w / 10, vertical: 100),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Skills & Services',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: fontSizehead,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                          Container(
+                            height: 4,
+                            width: 100,
+                            color: Color(0xFF4FC3F7),
+                          ),
+                          SizedBox(height: 50),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    SkillCard(
+                                      skill: 'Flutter Development',
+                                      percentage: 90,
+                                      color: Color(0xFF4FC3F7),
                                     ),
-                                    SizedBox(height: 15,),
-                                    Text('About me: ',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.firaSans(
-                                          fontSize: fontSizemain, color: Colors.white54),
+                                    SizedBox(height: 20),
+                                    SkillCard(
+                                      skill: 'UI/UX Design',
+                                      percentage: 85,
+                                      color: Color(0xFF4FC3F7),
                                     ),
-                                    SizedBox(height: 10,),
-                                    Text('With a B.Tech degree and hands-on experience, '
-                                        'I specialize in Flutter for mobile apps, web apps, and websites, coupled with UI/UX design expertise using tools like Figma, and '
-                                        'Im dedicated to delivering high-quality solutions that exceed user expectations.',
-                                      textAlign: TextAlign.start,
-                                      style: GoogleFonts.firaSans(
-                                          fontSize: fontSizemain, color: Colors.white),
+                                    SizedBox(height: 20),
+                                    SkillCard(
+                                      skill: 'Dart Programming',
+                                      percentage: 88,
+                                      color: Color(0xFF4FC3F7),
                                     ),
-                                    SizedBox(height: 30,),
-                                    Row(
-                                      children: [
-                                        CustomButton(
-                                            h: h,
-                                            w: w,
-                                            fontSize: fontSizemore,
-                                            text: 'Hire ME',
-                                            Pageclick: LandingPageWeb()),
-                                        SizedBox(width: 18,),
-                                        CustomButton(
-                                            h: h,
-                                            w: w,
-                                            fontSize: fontSizemore,
-                                            text: 'download cv',
-                                            Pageclick: LandingPageWeb()),
-                                      ],
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 40),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    SkillCard(
+                                      skill: 'Figma Design',
+                                      percentage: 80,
+                                      color: Color(0xFF4FC3F7),
+                                    ),
+                                    SizedBox(height: 20),
+                                    SkillCard(
+                                      skill: 'API Integration',
+                                      percentage: 75,
+                                      color: Color(0xFF4FC3F7),
+                                    ),
+                                    SizedBox(height: 20),
+                                    SkillCard(
+                                      skill: 'Git Version Control',
+                                      percentage: 70,
+                                      color: Color(0xFF4FC3F7),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 200),
-                          Text(
-                            textAlign: TextAlign.left,
-                            'Skills & Service',
-                            style: GoogleFonts.fingerPaint(
-                                fontSize: fontSizehead, color: Colors.white),
-                          ),
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceAround,
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-  SizedBox(
-  width: 450.0,
-  height: 450.0,
-  child: Center(
-    child: DefaultTextStyle(
-      style: GoogleFonts.fingerPaint(
-          fontSize: fontSizehead, color: Colors.white),
-      child: AnimatedTextKit(
-        animatedTexts: [
-          TypewriterAnimatedText('"In the realm of software development,'),
-          TypewriterAnimatedText(' innovation is our compass, and code is our canvas. '),
-          TypewriterAnimatedText('Lets craft tomorrows solutions, today."'),
+                        ],
+                      ),
+                    ),
 
-        ],
-        onTap: () {
-          print("Tap Event");
-        },
-      ),
-    ),
-  ),
-),
-    Container(
-      height: 400,width: 550,
-      child:
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:[
-              Option(fontSizemore,'FLUTTER'),
-              Option(fontSizemore,'UI/UX DESIGNING'),
-              Option(fontSizemore,'DART'),
-              Option(fontSizemore,'FIGMA'),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Option(fontSizemore,'ADOBE'),
-              Option(fontSizemore,'MS OFFICE'),
-              Option(fontSizemore,'GIT'),
-              Option(fontSizemore,'API INTEGRATION'),
-            ],
-          )
-        ],
-      ),
-    ),
-  ],
-),
-                          SizedBox(height: h),
+                    // Footer
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 50),
+                      color: Colors.black.withOpacity(0.5),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Get In Touch',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: fontSizehead,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 30),
                           Container(
-                            height: 100,
-                            color: Colors.black12,
+                            height: 4,
+                            width: 100,
+                            color: Color(0xFF4FC3F7),
+                          ),
+                          SizedBox(height: 50),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SocialIcon(icon: Icons.email, url: 'mailto:rizvin@example.com'),
+                              SizedBox(width: 20),
+                              SocialIcon(icon: Icons.link, url: 'https://linkedin.com'),
+                              SizedBox(width: 20),
+                              SocialIcon(icon: Icons.code, url: 'https://github.com'),
+                            ],
+                          ),
+                          SizedBox(height: 50),
+                          Text(
+                            '© 2023 Rizvin K Salim. All Rights Reserved',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: fontSizemin,
+                              color: Colors.white70,
+                            ),
                           ),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+}
+
+// Custom Widgets
+
+class NavTab extends StatelessWidget {
+  final String taboption;
+  final Widget page;
+
+  const NavTab({required this.taboption, required this.page});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
+        child: Text(
+          taboption,
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: 16,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class InfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final double fontSizemain;
+
+  const InfoRow({
+    required this.label,
+    required this.value,
+    required this.fontSizemain,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: fontSizemain,
+            color: Colors.white70,
+          ),
+        ),
+        SizedBox(width: 10),
+        Text(
+          value,
+          style: GoogleFonts.spaceGrotesk(
+            fontSize: fontSizemain,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SkillCard extends StatelessWidget {
+  final String skill;
+  final int percentage;
+  final Color color;
+
+  const SkillCard({
+    required this.skill,
+    required this.percentage,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              skill,
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              '$percentage%',
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 14,
+                color: Colors.white70,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 10),
+        Container(
+          height: 8,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 1000),
+                width: (percentage / 100) * MediaQuery.of(context).size.width * 0.3,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class SocialIcon extends StatelessWidget {
+  final IconData icon;
+  final String url;
+
+  const SocialIcon({required this.icon, required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        // Implement URL launch
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Color(0xFF4FC3F7), width: 2),
+        ),
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 24,
+        ),
+      ),
+    );
+  }
+}
+
+class ParticlePainter extends CustomPainter {
+  final bool isScrolled;
+
+  ParticlePainter({required this.isScrolled});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = isScrolled ? Color(0xFF4FC3F7).withOpacity(0.3) : Colors.white.withOpacity(0.1)
+      ..strokeWidth = 1.0
+      ..style = PaintingStyle.fill;
+
+    final rng = Random(42); // Fixed seed for consistent particle placement
+    final particleCount = 50;
+
+    for (var i = 0; i < particleCount; i++) {
+      final x = rng.nextDouble() * size.width;
+      final y = rng.nextDouble() * size.height;
+      final radius = rng.nextDouble() * 2 + 1;
+
+      canvas.drawCircle(Offset(x, y), radius, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+class FadeIn extends StatelessWidget {
+  final Widget child;
+  final Duration duration;
+
+  const FadeIn({
+    required this.child,
+    this.duration = const Duration(milliseconds: 500),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: duration,
+      curve: Curves.easeInOut,
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: Transform.translate(
+            offset: Offset(0.0, 20 * (1 - value)),
+            child: child,
+          ),
+        );
+      },
+      child: child,
     );
   }
 }

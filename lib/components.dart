@@ -39,8 +39,8 @@ class _TabWebState extends State<TabWeb> {
         child: Text(
           widget.taboption,
           style: isSelected
-              ? GoogleFonts.fingerPaint(fontSize: 25, color: Colors.white)
-              : GoogleFonts.fingerPaint(fontSize: 20, color: Colors.white70),
+              ? GoogleFonts.spaceGrotesk(fontSize: 25, color: Colors.white)
+              : GoogleFonts.spaceGrotesk(fontSize: 20, color: Colors.white70),
         ),
       ),
     );

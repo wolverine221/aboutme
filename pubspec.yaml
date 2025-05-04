@@ -40,7 +40,7 @@ dependencies:
   responsive_framework: ^1.4.0
   get: ^4.6.6
   neopop: ^1.0.2
-  flutter_animated_button: ^2.0.3
+  flutter_animated_button: ^2.0.4
   animated_text_kit: ^4.2.2
 
 dev_dependencies:

@@ -110,7 +110,7 @@ AnimatedButton Option(double fontSizemore,String text) {
     height: 50,
     width: 250,
     text: text,
-    textStyle: GoogleFonts.allan(
+    textStyle: GoogleFonts.spaceGrotesk(
         fontSize: fontSizemore, color: Colors.white),
     isReverse: true,
     selectedTextColor: Colors.black,
