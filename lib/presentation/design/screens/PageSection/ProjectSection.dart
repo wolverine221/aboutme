@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constants/app_colors.dart';
 import '../widgets/ProjectCard.dart';
 
 class ProjectsSection extends StatelessWidget {
-  const ProjectsSection({super.key});
+  final bool isMobile;
+  const ProjectsSection({super.key,this.isMobile=false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ProjectsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          isMobile?const SizedBox():Text(
             'SELECTED WORKS',
             style: GoogleFonts.spaceGrotesk(
               fontSize: 16,
@@ -36,33 +36,37 @@ class ProjectsSection extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: isMobile?20:40),
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
               childAspectRatio: 1.5,
               mainAxisSpacing: 20,
               crossAxisSpacing: 20,
-              children:  const [
+              children:  [
                 ProjectCard(
                   title: 'PAYMENT APP',
                   subtitle: 'Experimental UI Series',
                   color: AppColors.primary,
+                  isMobile: isMobile,
                 ),
-                ProjectCard(
+                 ProjectCard(
                   title: 'FOOD DELIVERY APP',
                   subtitle: 'UI/UX Design',
                   color: AppColors.secondary,
+                  isMobile: isMobile,
                 ),
-                ProjectCard(
+                 ProjectCard(
                   title: 'TRADING APP',
                   subtitle: 'Interactive Art',
                   color: AppColors.tertiary,
+                   isMobile: isMobile,
                 ),
-                ProjectCard(
+                 ProjectCard(
                   title: 'PERSONAL PORTFOLIO',
                   subtitle: 'Creative Coding',
                   color: AppColors.mediumAccent,
+                  isMobile: isMobile,
                 ),
               ],
             ),

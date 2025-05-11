@@ -62,7 +62,7 @@ class AppTextStyles {
   );
 
   static TextStyle xxlMidBold = GoogleFonts.spaceGrotesk(
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: FontWeight.w500,
     color: Colors.white,
   );
@@ -241,6 +241,12 @@ class AppTextStyles {
     color: AppColors.textOnDark,
   );
 
+  static TextStyle aboutBorderText = GoogleFonts.spaceGrotesk(
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    color: Colors.white.withOpacity(0.8),
+    height: 1.6,
+  );
   // Footnote (11)
   static TextStyle footnoteRegular = GoogleFonts.spaceGrotesk(
     fontSize: 11.sp,

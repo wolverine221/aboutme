@@ -12,7 +12,8 @@ import 'PageSection/ProjectSection.dart';
 
 
 class PortfolioWebPage extends StatefulWidget {
-  const PortfolioWebPage({super.key});
+  final bool isMobile;
+  const PortfolioWebPage({super.key,this.isMobile=false});
 
   @override
   State<PortfolioWebPage> createState() => _PortfolioWebPageState();
@@ -88,8 +89,8 @@ class _PortfolioWebPageState extends State<PortfolioWebPage> {
             },
             children: [
               HomeSection(pageController: pageController,currentPage: _currentPage ),
-              const AboutSection(),
-              const ProjectsSection(),
+              AboutSection(isMobile: widget.isMobile,),
+              ProjectsSection(isMobile: widget.isMobile,),
               const ContactSection(),
             ],
           ),

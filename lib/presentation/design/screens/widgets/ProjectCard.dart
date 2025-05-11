@@ -5,12 +5,14 @@ class ProjectCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Color color;
+  final bool isMobile;
 
   const ProjectCard({
     super.key,
     required this.title,
     required this.subtitle,
     required this.color,
+    required this.isMobile,
   });
 
   @override
@@ -23,7 +25,7 @@ class ProjectCard extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               color: color,
-              width: 2,
+              width: 1,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -35,7 +37,7 @@ class ProjectCard extends StatelessWidget {
               Text(
                 title,
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 32,
+                  fontSize: isMobile?20:32,
                   fontWeight: FontWeight.w900,
                   color: color,
                 ),
@@ -43,7 +45,7 @@ class ProjectCard extends StatelessWidget {
               Text(
                 subtitle,
                 style: GoogleFonts.spaceGrotesk(
-                  fontSize: 16,
+                  fontSize: isMobile?9:16,
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),

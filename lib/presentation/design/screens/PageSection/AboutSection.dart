@@ -6,7 +6,8 @@ import 'package:portfolio/constants/app_colors.dart';
 import 'package:portfolio/constants/app_textstyle.dart';
 
 class AboutSection extends StatefulWidget {
-  const AboutSection({super.key});
+  final bool isMobile;
+  const AboutSection({super.key,this.isMobile=false});
 
   @override
   State<AboutSection> createState() => _AboutSectionState();
@@ -85,7 +86,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
                 children: [
                   FadeInDown(
                     duration: const Duration(milliseconds: 700),
-                    child: Text(
+                    child: widget.isMobile?SizedBox():Text(
                       'ABOUT ME',
                       style: AppTextStyles.xxlMidBold.copyWith(
                         color: AppColors.primary,
@@ -98,7 +99,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
                     delay: const Duration(milliseconds: 200),
                     duration: const Duration(milliseconds: 800),
                     child: Text(
-                      'I\'m a boundary-pushing\nfront-end developer\nbased in the digital cosmos',
+                      'I\'m a boundary-pushing\nfront-end developer\nwith creating powerful UI/UX designing in every platforms.',
                       style: AppTextStyles.aboutSubTitle,
                     ),
                   ),
@@ -110,22 +111,17 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
                           'I create digital experiences that challenge norms and engage '
                           'users on a visceral level. My work exists at the intersection '
                           'of code and creativity.',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white.withOpacity(0.8),
-                        height: 1.6,
-                      ),
+                      style: widget.isMobile?AppTextStyles.aboutBorderText.copyWith(fontSize: 10):AppTextStyles.aboutBorderText
                     ),
                   ),
                   const SizedBox(height: 40),
                   Wrap(
-                    spacing: 20,
+                    spacing: widget.isMobile?10:20,
                     runSpacing: 20,
-                    children: List.generate(Skills.length, (i) {
+                    children: List.generate(skills.length, (i) {
                       return FadeInUp(
                         delay: Duration(milliseconds: 500 + (i * 100)),
-                        child: SkillList(Skills[i]),
+                        child: SkillList(skills[i]),
                       );
                     }),
                   ),
@@ -139,8 +135,8 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
                   delay: const Duration(milliseconds: 400),
                   duration: const Duration(milliseconds: 1200),
                   child: Container(
-                    width: 500,
-                    height: 500,
+                    width: widget.isMobile?250:500,
+                    height: widget.isMobile?250:500,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -249,7 +245,7 @@ Widget SkillList(String text) {
 }
 
 
-final List<String> Skills = [
+final List<String> skills = [
   'Flutter',
   'UI/UX',
   'Getx State Management',
