@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/constants/app_constants.dart';
 import 'package:portfolio/constants/app_textstyle.dart';
 
-import '../../constants/app_colors.dart';
-import '../widget/custombuttonmini.dart';
-import '../widget/widget.dart';
+import '../../../constants/app_colors.dart';
+import '../../widget/custombuttonmini.dart';
+import '../../widget/widget.dart';
 
 class LandingWebPage extends StatefulWidget {
   const LandingWebPage({super.key});
@@ -30,80 +30,51 @@ class _LandingWebPageState extends State<LandingWebPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            widgetConstant.BoxWidget(
-              size,
-              Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30.0),
-                    child: const Align(
-                        alignment: Alignment.bottomRight,
-                        child: CustomButton()),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20.0,
+            SizedBox(
+              height: size.height,
+              child: widgetConstant.BoxWidget(
+                size,
+                Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Expanded(
+                          child: Image.asset('asset/images/dpimage.png',scale: 0.75,)),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'RIZVIN K SALIM',
-                              style: AppTextStyles.xxlBold.copyWith(
-                                  color: AppColors.neutral, fontSize: 40.sp),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'MOBILE APP DEVELOPER\n'
-                              'SPECIALIZED IN FLUTTER FRAMEWORK\n'
-                              'WITH UI/UX DESIGN EXPERTISE\n'
-                              'AND CREATIVE TECH SOLUTIONS',
-                              style: AppTextStyles.xxlMedium.copyWith(
-                                color: AppColors.neutral,
-                                height:
-                                    1.4, // Optional: for better spacing between lines
+                    // Padding(
+                    //   padding: const EdgeInsets.only(right: 30.0),
+                    //   child: const Align(
+                    //       alignment: Alignment.bottomRight,
+                    //       child: CustomButton()),
+                    // ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+
+                              Text(
+                                'Rizvin'.toUpperCase(),
+                                style: AppTextStyles.xxlBold.copyWith(
+                                    ),
                               ),
-                              textAlign:
-                                  TextAlign.left, // or center based on layout
-                            ),
-                            Spacer(),
-                            widgetConstant.bulletPoints("iOS & Android App Development"),
-                            widgetConstant.bulletPoints(
-                                "Cross-Platform Development with Flutter"),
-                            widgetConstant.bulletPoints("Expert in UI/UX Design"),
-                            widgetConstant.bulletPoints("Proficient in Figma for Prototyping"),
-                            widgetConstant.bulletPoints("State Management (BLoC, gRPC)"),
-                            widgetConstant.bulletPoints("API Integration & RESTful Services"),
-                            widgetConstant.bulletPoints("Version Control with Git & GitHub"),
-                            widgetConstant.bulletPoints(
-                                "Graphic & Video Editing (Adobe, Premiere Pro)"),
-                            widgetConstant.bulletPoints(
-                                "Photography & Creative Content Creation"),
-                            widgetConstant.bulletPoints(
-                                "Attention to Detail & User-Centered Design"),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
-                      ],
+
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Expanded(
-                        child: Image.asset('asset/images/dpimage.png')),
-                  ),
-                  Spacer(),
-                  //AnimatedProfileImage(scrollController: _scrollController,containerSize: size,),
-                ],
+
+                    //AnimatedProfileImage(scrollController: _scrollController,containerSize: size,),
+                  ],
+                ),
               ),
             ),
 

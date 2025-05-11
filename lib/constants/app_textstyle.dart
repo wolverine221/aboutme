@@ -1,165 +1,294 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'app_colors.dart'; // Assuming you have this file
 
 class AppTextStyles {
-  // Display
-  static TextStyle displayRegular = GoogleFonts.redHatDisplay(
-    fontSize: 32.sh,
-    fontWeight: FontWeight.w400, // Regular
+  // Display (32)
+  static TextStyle displayRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle displayMedium = GoogleFonts.redHatDisplay(
-    fontSize: 32,
-    fontWeight: FontWeight.w500, // Medium
+  static TextStyle displayMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle displaySemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 32,
-    fontWeight: FontWeight.w600, // SemiBold
+  static TextStyle displaySemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle displayBold = GoogleFonts.redHatDisplay(
-    fontSize: 32,
-    fontWeight: FontWeight.w700, // Bold
+  static TextStyle displayBold = GoogleFonts.spaceGrotesk(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
   );
 
-  // Medium Display (M)
-  static TextStyle mediumDisplayRegular = GoogleFonts.redHatDisplay(
-    fontSize: 28,
-    fontWeight: FontWeight.w400, // Regular
+  // Medium Display (28)
+  static TextStyle mediumDisplayRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 28.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle mediumDisplayMedium = GoogleFonts.redHatDisplay(
-    fontSize: 28,
-    fontWeight: FontWeight.w500, // Medium
+  static TextStyle mediumDisplayMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 28.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle mediumDisplaySemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 28,
-    fontWeight: FontWeight.w600, // SemiBold
+  static TextStyle mediumDisplaySemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 28.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle mediumDisplayBold = GoogleFonts.redHatDisplay(
-    fontSize: 28,
-    fontWeight: FontWeight.w700, // Bold
+  static TextStyle mediumDisplayBold = GoogleFonts.spaceGrotesk(
+    fontSize: 28.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
   );
 
-  // XXL
-  static TextStyle xxlRegular = GoogleFonts.redHatDisplay(
+  // XXL (24)
+  static TextStyle xxlRegular = GoogleFonts.spaceGrotesk(
     fontSize: 24,
     fontWeight: FontWeight.w400,
+    color: Colors.white,
   );
 
-  static TextStyle xxlMedium = GoogleFonts.redHatDisplay(
+  static TextStyle xxlMidBold = GoogleFonts.spaceGrotesk(
     fontSize: 24,
     fontWeight: FontWeight.w500,
+    color: Colors.white,
   );
 
-  static TextStyle xxlSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 24,
+  static TextStyle xlMidRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.white,
+  );
+
+  static TextStyle xxlMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle xxlSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 24.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xxlBold = GoogleFonts.redHatDisplay(
+  static TextStyle xxlBold = GoogleFonts.spaceGrotesk(
     fontSize: 24,
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
   );
 
-  // XL
-  static TextStyle xlRegular = GoogleFonts.redHatDisplay(
-    fontSize: 20,
+  // XL (20)
+  static TextStyle xlRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xlMedium = GoogleFonts.redHatDisplay(
-    fontSize: 20,
+  static TextStyle xlMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xlSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 20,
+  static TextStyle xlSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 20.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  // L
-  static TextStyle lRegular = GoogleFonts.redHatDisplay(
-    fontSize: 18,
+  static TextStyle xlBold = GoogleFonts.spaceGrotesk(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
+  );
+
+  // L (18)
+  static TextStyle lRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 18.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle lMedium = GoogleFonts.redHatDisplay(
-    fontSize: 18,
+  static TextStyle lMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 18.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle lSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 18,
+  static TextStyle lSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 18.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  // M
-  static TextStyle mRegular = GoogleFonts.redHatDisplay(
+  static TextStyle lBold = GoogleFonts.spaceGrotesk(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
+  );
+
+  // M (16)
+  static TextStyle mRegular = GoogleFonts.spaceGrotesk(
     fontSize: 16.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle mMedium = GoogleFonts.redHatDisplay(
-    fontSize: 16,
+  static TextStyle mMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 16.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle mSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 16,
+  static TextStyle mSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 16.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  // S
-  static TextStyle sRegular = GoogleFonts.redHatDisplay(
-    fontSize: 14,
+  static TextStyle mBold = GoogleFonts.spaceGrotesk(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
+  );
+
+  // S (14)
+  static TextStyle sRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle sMedium = GoogleFonts.redHatDisplay(
-    fontSize: 14,
+  static TextStyle sMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle sSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 14,
+  static TextStyle sSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  // XS
-  static TextStyle xsMedium = GoogleFonts.redHatDisplay(
-    fontSize: 13,
-    fontWeight: FontWeight.w500,
+  static TextStyle sBold = GoogleFonts.spaceGrotesk(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xsSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 13,
-    fontWeight: FontWeight.w600,
-  );
-
-  // XXS
-  static TextStyle xxsRegular = GoogleFonts.redHatDisplay(
-    fontSize: 12,
+  // XS (13)
+  static TextStyle xsRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 13.sp,
     fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xxsMedium = GoogleFonts.redHatDisplay(
-    fontSize: 12,
+  static TextStyle xsMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 13.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
   );
 
-  static TextStyle xxsSemiBold = GoogleFonts.redHatDisplay(
-    fontSize: 12,
+  static TextStyle xsSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 13.sp,
     fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
   );
 
-  // Footnote
-  static TextStyle footnoteMedium = GoogleFonts.redHatDisplay(
-    fontSize: 11,
+  static TextStyle xsBold = GoogleFonts.spaceGrotesk(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
+  );
+
+  // XXS (12)
+  static TextStyle xxsRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle xxsMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle xxsSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle xxsBold = GoogleFonts.spaceGrotesk(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textOnDark,
+  );
+
+  // Footnote (11)
+  static TextStyle footnoteRegular = GoogleFonts.spaceGrotesk(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle footnoteMedium = GoogleFonts.spaceGrotesk(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.textOnDark,
+  );
+
+  static TextStyle footnoteSemiBold = GoogleFonts.spaceGrotesk(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w600,
+    color: AppColors.textOnDark,
+  );
+
+  // Special styles for your portfolio
+  static TextStyle heroTitle = GoogleFonts.spaceGrotesk(
+    fontSize: 72.sp,
+    fontWeight: FontWeight.w900,
+    color: AppColors.primary,
+    height: 0.9,
+  );
+
+  static TextStyle sectionTitle = GoogleFonts.spaceGrotesk(
+    fontSize: 48.sp,
+    fontWeight: FontWeight.w900,
+    color: Colors.white,
+    height: 0.9,
+  );
+
+  static TextStyle navItem = GoogleFonts.spaceGrotesk(
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 1.5,
+  );
+
+  static TextStyle projectTitle = GoogleFonts.spaceGrotesk(
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w900,
+  );
+  static TextStyle aboutSubTitle = GoogleFonts.spaceGrotesk(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w900,
+    height: 0.9,
+    color: Colors.white,
   );
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Core colors from your request
   static const Color primary = Color(0xFFD99543);  // Warm amber (main bg)
-  // static const Color primaryCopy = Color(0xFFD6A457);  // Warm amber (main bg)
   static const Color secondary = Color(0xFF8C633F);  // Mocha brown
   static const Color tertiary = Color(0xFFD9C3B0);  // Cream beige
   static const Color darkAccent = Color(0xFF401B0E);  // Deep chocolate
@@ -21,6 +20,7 @@ class AppColors {
   // Neutrals derived from your palette
   static const Color neutralLight = Color(0xFFEFE5DC);
   static const Color neutral = Color(0xFFD9C3B0);
+  static const Color white = Color(0xFFFFFFFF);
   static const Color neutralDark = Color(0xFFB8A897);
 
   // Semantic colors
