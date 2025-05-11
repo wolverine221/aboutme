@@ -171,7 +171,7 @@ class _HomeSectionState extends State<HomeSection> with SingleTickerProviderStat
                     padding: EdgeInsets.only(right: 20.w, bottom: 0.h),
                     child: Image.asset(
                       'asset/images/dpimage.png',
-                      height: size.height * 0.7,
+                      //height: size.height * 0.7,
                       fit: BoxFit.contain,
                     ),
                   ),
